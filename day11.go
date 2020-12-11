@@ -14,28 +14,10 @@ func printm(m [][]byte,r int) {
 }
 
 func adjacent1(m [][]byte, x int, y int) []byte {
-    h := len(m) -1
-    w := len(m[0]) -1
     var b []byte
-    xmin := x - 1
-    if xmin < 0 {
-      xmin = 0
-    }
-    ymin := y - 1
-    if ymin < 0 {
-      ymin = 0
-    }
-    ymax := y + 1
-    if ymax > w {
-      ymax = w
-    }
-    xmax := x + 1
-    if xmax > h {
-      xmax = h
-    }
-    for i := xmin; i <= xmax; i++ {
-        for j := ymin; j <= ymax; j++ {
-            if x!=i || y!=j {
+    for i := x-1; i <= x+1; i++ {
+        for j := y-1; j <= y+1; j++ {
+            if inbound(m,i,j) && (x!=i || y!=j) {
                 b = append(b, m[i][j])
             }
         }
@@ -255,8 +237,8 @@ LLL.LLLL.LL.LLLLLLLLLLL.LLLLLLLLLL..LLLLLLLL.LL.LLLLL.LL.LLLLLLLLLLLLLLLLLLLLLLL
 LLLLLLLL.LLLLLLLLL.LLLL.LLLL..LLLLL.LLLLLLLL.LLLLLL.LLLLLLLLL.LLLLLLLLLLLLLLLL.LLLLLLLLLL.LLLLLL`
     _ = s // to bypass var not used   
     _ = input // to bypass var not used   
-    //matrix, round := solution1(input)
-    matrix, round := solution2(input)
+    matrix, round := solution1(input)
+    //matrix, round := solution2(input)
     printm(matrix, round)
     fmt.Printf("solution : %d\n", howmanym(matrix, '#'))
 }
